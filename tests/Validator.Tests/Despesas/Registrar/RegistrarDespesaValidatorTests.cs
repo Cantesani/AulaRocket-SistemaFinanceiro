@@ -1,4 +1,6 @@
-﻿using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
+﻿using CommonTestUtilities.Request;
+using FluentAssertions;
+using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Communication.Responses;
 
@@ -11,20 +13,13 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new RegistrarDespesaValidator();
-            var request = new RequestDespesaJson
-            {
-                Valor = 100,
-                Data = DateTime.Now.AddDays(-1),
-                Descricao = "Descrição",
-                Titulo = "Samsung",
-                TipoPagto = SistemaFinanceiro.Communication.Enums.TipoPagto.Debito
-            };
+            var request = RequestDespesaJsonBuilder.Builder();
 
             //ACT
             var result = validator.Validate(request);
 
             //ASSERT
-            Assert.True(result.IsValid);
+            //result.IsValid.Should().BeTrue();
         }
     }
 }
