@@ -5,6 +5,6 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
 {
     public interface IRegistrarDespesaUseCase
     {
-        ResponseDespesaJson Execute(RequestDespesaJson request);
+        Task<ResponseDespesaJson> Execute(RequestDespesaJson request);
     }
 }

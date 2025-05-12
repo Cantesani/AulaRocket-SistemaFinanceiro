@@ -120,6 +120,9 @@
   <data name="DATA_PRECISA_SER_ANTERIOR_A_ATUAL" xml:space="preserve">
     <value>A data precisa ser anterior a atual.</value>
   </data>
+  <data name="DESPESA_NAO_ENCONTRADA" xml:space="preserve">
+    <value>Despesa não encontrada.</value>
+  </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
   </data>

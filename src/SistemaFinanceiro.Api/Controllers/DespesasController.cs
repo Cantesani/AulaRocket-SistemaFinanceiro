@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaFinanceiro.Application.UseCases.Despesas;
+using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
+using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
+using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Communication.Responses;
@@ -12,15 +15,53 @@ namespace SistemaFinanceiro.Api.Controllers
     public class DespesasController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseDespesaJson), StatusCodes.Status201Created)]
-        public IActionResult Registra(
+        [ProducesResponseType(typeof(ResponseRegistraDespesaJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Registra(
                                 [FromServices] IRegistrarDespesaUseCase useCase
-                               ,[FromBody] RequestDespesaJson request)
+                               , [FromBody] RequestDespesaJson request)
         {
-            var response = useCase.Execute(request);
+            var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
-
         }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseLstDespesasJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> GetAllDespesas([FromServices] IGetAllDespesasUseCase useCase)
+        {
+            var response = await useCase.Execute();
+
+            if (response.Despesas.Count() != 0)
+                return Ok(response);
+
+            return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(typeof(ResponseDespesaJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetById(
+                                            [FromRoute] long id,
+                                            [FromServices] IGetByIdDespesaUseCase useCase)
+        {
+            var response = await useCase.execute(id);
+            return Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromRoute] long id,
+                                                [FromServices] IDeleteDespesaUseCase useCase)
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+
+
     }
 }

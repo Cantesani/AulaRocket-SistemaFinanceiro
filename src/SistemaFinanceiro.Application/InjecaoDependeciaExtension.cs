@@ -1,4 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SistemaFinanceiro.Application.AutoMapper;
+using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
+using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
+using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 
 namespace SistemaFinanceiro.Application
@@ -13,7 +17,21 @@ namespace SistemaFinanceiro.Application
 
         public static void AddApplication(this IServiceCollection services)
         {
+            AddAutoMapper(services);
+            AddUseCases(services);
+        }
+
+        private static void AddAutoMapper(IServiceCollection services)
+        {
+            services.AddAutoMapper(typeof(AutoMapping));
+        }
+
+        private static void AddUseCases(IServiceCollection services)
+        {
             services.AddScoped<IRegistrarDespesaUseCase, RegistrarDespesaUseCase>();
+            services.AddScoped<IGetAllDespesasUseCase, GetAllDespesasUseCase>();
+            services.AddScoped<IGetByIdDespesaUseCase, GetByIdDespesaUseCase>();
+            services.AddScoped<IDeleteDespesaUseCase, DeleteDespesaUseCase>();
         }
 
     }

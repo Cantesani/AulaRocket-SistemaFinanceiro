@@ -24,7 +24,8 @@ namespace SistemaFinanceiro.Infrastructure
         private static void AddRepositories(IServiceCollection services)
         {
             services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
-            services.AddScoped<IDespesasRepository, DespesasRepository>();
+            services.AddScoped<IDespesasReadOnlyRepository, DespesasRepository>();
+            services.AddScoped<IDespesasWriteOnlyRepository, DespesasRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

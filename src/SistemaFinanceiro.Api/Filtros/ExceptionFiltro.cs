@@ -19,19 +19,12 @@ namespace SistemaFinanceiro.Api.Filtros
 
         private void PegarErroException(ExceptionContext context)
         {
-            if(context.Exception is ErroValidacaoException)
-            {
-                var ex = (ErroValidacaoException)context.Exception;
-                var erroResponse = new ResponseErrorJson(ex.Errors);
+            var SistemaFinanceiroException = (SistemaFinanceiroException)context.Exception;
+            var erroResponse = new ResponseErrorJson(SistemaFinanceiroException.GetErrors());
 
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new ObjectResult(erroResponse);
-            }else
-            {
-                var erroResponse = new ResponseErrorJson(context.Exception.Message);
-                context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-                context.Result = new ObjectResult(erroResponse);
-            }
+            context.HttpContext.Response.StatusCode = SistemaFinanceiroException.StatusCode;
+            context.Result = new ObjectResult(erroResponse);
+
         }
 
         private void ErroDesconhecido(ExceptionContext context)

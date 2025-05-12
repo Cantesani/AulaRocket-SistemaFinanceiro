@@ -1,11 +1,21 @@
-﻿namespace SistemaFinanceiro.Exception.ExceptionBase
+﻿using System.Net;
+
+namespace SistemaFinanceiro.Exception.ExceptionBase
 {
     public class ErroValidacaoException : SistemaFinanceiroException
     {
-        public List<string> Errors { get; set; }
-        public ErroValidacaoException(List<string> errorMessages)
+        private readonly List<string> _errors;
+
+        public override int StatusCode => (int)HttpStatusCode.BadRequest;
+
+        public ErroValidacaoException(List<string> errorMessages): base(string.Empty)
         {
-            Errors = errorMessages;
+            _errors = errorMessages;
+        }
+
+        public override List<string> GetErrors()
+        {
+            return _errors;
         }
     }
 }

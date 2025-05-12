@@ -1,4 +1,5 @@
-﻿using SistemaFinanceiro.Communication.Enums;
+﻿using AutoMapper;
+using SistemaFinanceiro.Communication.Enums;
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Communication.Responses;
 using SistemaFinanceiro.Domain.Entities;
@@ -10,32 +11,29 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
 {
     public class RegistrarDespesaUseCase: IRegistrarDespesaUseCase
     {
-        private readonly IDespesasRepository _repository;
+        private readonly IDespesasWriteOnlyRepository _repository;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
-        public RegistrarDespesaUseCase(IDespesasRepository repository,
-                                       IUnidadeDeTrabalho unidadeDeTrabalho )
+        private readonly IMapper _mapper;
+        public RegistrarDespesaUseCase(IDespesasWriteOnlyRepository repository,
+                                       IUnidadeDeTrabalho unidadeDeTrabalho,
+                                       IMapper mapper)
         {
             _repository = repository;
             _unidadeDeTrabalho = unidadeDeTrabalho;
+            _mapper = mapper;
         }
 
-        public ResponseDespesaJson Execute(RequestDespesaJson request)
+        public async Task<ResponseDespesaJson> Execute(RequestDespesaJson request)
         {
             Validate(request);
 
-            var entity = new Despesa
-            {
-                Titulo = request.Titulo,
-                Descricao = request.Descricao,
-                Data = request.Data,
-                Valor = request.Valor,
-                TipoPagto = (Domain.Enums.TipoPagto)request.TipoPagto
-            };
+            var entity = _mapper.Map<Despesa>(request);
 
-            _repository.Add(entity);
-            _unidadeDeTrabalho.Commit();
+            await _repository.Add(entity);
+            await _unidadeDeTrabalho.Commit();
 
-            return new ResponseDespesaJson();
+            return _mapper.Map<ResponseDespesaJson>(entity);
+            //return new ResponseDespesaJson();
         }
 
         public void Validate(RequestDespesaJson request)
