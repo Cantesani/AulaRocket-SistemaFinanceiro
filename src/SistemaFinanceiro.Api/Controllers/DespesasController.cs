@@ -4,6 +4,7 @@ using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
+using SistemaFinanceiro.Application.UseCases.Despesas.Update;
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Communication.Responses;
 
@@ -60,6 +61,23 @@ namespace SistemaFinanceiro.Api.Controllers
         {
             await useCase.Execute(id);
             return NoContent();
+        }
+
+        [HttpPut]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson),StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update([FromRoute] long id,
+                                                [FromBody] RequestDespesaJson request,
+                                                [FromServices] IUpdateDespesaUseCase useCase
+                                                    )
+        {
+
+            await useCase.Execute(id, request);
+
+
+            return Ok();
         }
 
 

@@ -26,6 +26,7 @@ namespace SistemaFinanceiro.Infrastructure
             services.AddScoped<IUnidadeDeTrabalho, UnidadeDeTrabalho>();
             services.AddScoped<IDespesasReadOnlyRepository, DespesasRepository>();
             services.AddScoped<IDespesasWriteOnlyRepository, DespesasRepository>();
+            services.AddScoped<IDespesaUpdateOnlyRepository, DespesasRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

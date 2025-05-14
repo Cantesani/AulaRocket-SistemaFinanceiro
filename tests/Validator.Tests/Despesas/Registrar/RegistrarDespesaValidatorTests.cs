@@ -1,9 +1,7 @@
 ﻿using CommonTestUtilities.Request;
 using FluentAssertions;
-using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
+using SistemaFinanceiro.Application.UseCases.Despesas;
 using SistemaFinanceiro.Communication.Enums;
-using SistemaFinanceiro.Communication.Requests;
-using SistemaFinanceiro.Communication.Responses;
 using SistemaFinanceiro.Exception;
 
 namespace Validator.Tests.Despesas.Registrar
@@ -14,7 +12,7 @@ namespace Validator.Tests.Despesas.Registrar
         public void Sucesso()
         {
             //ARANGE
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var request = RequestDespesaJsonBuilder.Builder();
 
             //ACT
@@ -31,7 +29,7 @@ namespace Validator.Tests.Despesas.Registrar
         public void Error_Titulo_Branco(string titulo)
         {
             //ARANGE
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var request = RequestDespesaJsonBuilder.Builder();
             request.Titulo = titulo;
 
@@ -47,7 +45,7 @@ namespace Validator.Tests.Despesas.Registrar
         public void Error_Data_Futura()
         {
             //ARANGE
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var request = RequestDespesaJsonBuilder.Builder();
             request.Data = DateTime.Now.AddDays(1);
 
@@ -63,7 +61,7 @@ namespace Validator.Tests.Despesas.Registrar
         public void Error_Tipo_Pagamento_Invalido()
         {
             //ARANGE
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var request = RequestDespesaJsonBuilder.Builder();
             request.TipoPagto = (TipoPagto)50;
 
@@ -81,7 +79,7 @@ namespace Validator.Tests.Despesas.Registrar
         public void Error_Valor_Invalido(decimal valor)
         {
             //ARANGE
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var request = RequestDespesaJsonBuilder.Builder();
             request.Valor = valor;
 

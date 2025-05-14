@@ -2,11 +2,11 @@
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Exception;
 
-namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
+namespace SistemaFinanceiro.Application.UseCases.Despesas
 {
-    public class RegistrarDespesaValidator : AbstractValidator<RequestDespesaJson>
+    public class DespesaValidator : AbstractValidator<RequestDespesaJson>
     {
-        public RegistrarDespesaValidator()
+        public DespesaValidator()
         {
             RuleFor(x => x.Titulo).NotEmpty().WithMessage(ResourceErrorMessages.TITULO_OBRIGATORIO);
             RuleFor(x => x.Valor).GreaterThan(0).WithMessage(ResourceErrorMessages.VALOR_PRECISA_SER_MAIOR_QUE_ZERO);

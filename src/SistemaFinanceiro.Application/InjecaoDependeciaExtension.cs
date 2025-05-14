@@ -4,6 +4,7 @@ using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
+using SistemaFinanceiro.Application.UseCases.Despesas.Update;
 
 namespace SistemaFinanceiro.Application
 {
@@ -32,6 +33,7 @@ namespace SistemaFinanceiro.Application
             services.AddScoped<IGetAllDespesasUseCase, GetAllDespesasUseCase>();
             services.AddScoped<IGetByIdDespesaUseCase, GetByIdDespesaUseCase>();
             services.AddScoped<IDeleteDespesaUseCase, DeleteDespesaUseCase>();
+            services.AddScoped<IUpdateDespesaUseCase, UpdateDespesaUseCase>();
         }
 
     }

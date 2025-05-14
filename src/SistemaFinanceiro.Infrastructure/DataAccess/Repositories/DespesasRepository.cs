@@ -1,11 +1,10 @@
-﻿using System.Net.NetworkInformation;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 
 namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
 {
-    internal class DespesasRepository : IDespesasReadOnlyRepository, IDespesasWriteOnlyRepository
+    internal class DespesasRepository : IDespesasReadOnlyRepository, IDespesasWriteOnlyRepository, IDespesaUpdateOnlyRepository
     {
         private readonly SistemaFinanceiroDbContext _dbContext;
         public DespesasRepository(SistemaFinanceiroDbContext dbContext)
@@ -35,9 +34,19 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
             return await _dbContext.Despesas.AsNoTracking().ToListAsync();
         }
 
-        public async Task<Despesa?> GetById(long id)
+        async Task<Despesa?> IDespesasReadOnlyRepository.GetById(long id)
         {
             return await _dbContext.Despesas.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        async Task<Despesa?> IDespesaUpdateOnlyRepository.GetById(long id)
+        {
+            return await _dbContext.Despesas.FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public void Update(Despesa despesa)
+        {
+            _dbContext.Despesas.Update(despesa);
         }
     }
 }

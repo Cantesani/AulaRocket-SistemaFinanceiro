@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using SistemaFinanceiro.Communication.Enums;
 using SistemaFinanceiro.Communication.Requests;
 using SistemaFinanceiro.Communication.Responses;
 using SistemaFinanceiro.Domain.Entities;
@@ -33,12 +32,11 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
             await _unidadeDeTrabalho.Commit();
 
             return _mapper.Map<ResponseDespesaJson>(entity);
-            //return new ResponseDespesaJson();
         }
 
         public void Validate(RequestDespesaJson request)
         {
-            var validator = new RegistrarDespesaValidator();
+            var validator = new DespesaValidator();
             var result = validator.Validate(request);
 
             if (!result.IsValid)
@@ -46,7 +44,6 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
                 var errorMessage = result.Errors.Select(x => x.ErrorMessage).ToList();
                 throw new ErroValidacaoException(errorMessage);
             }
-
         }
     }
 }
