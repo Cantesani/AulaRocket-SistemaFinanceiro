@@ -11,5 +11,6 @@ namespace SistemaFinanceiro.Domain.Repositories.Despesas
     {
         public Task<List<Despesa>> GetAll();
         public Task<Despesa?> GetById(long id);
+        public Task<List<Despesa>> GetByMes(DateOnly mes);
     }
 }

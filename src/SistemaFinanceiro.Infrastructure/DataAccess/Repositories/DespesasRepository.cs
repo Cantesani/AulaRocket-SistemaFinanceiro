@@ -19,9 +19,9 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
 
         public async Task<bool> Delete(long id)
         {
-            var result = await _dbContext.Despesas.FirstOrDefaultAsync(x=>x.Id == id);
+            var result = await _dbContext.Despesas.FirstOrDefaultAsync(x => x.Id == id);
 
-            if(result is null)
+            if (result is null)
                 return false;
 
             _dbContext.Despesas.Remove(result);
@@ -47,6 +47,21 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
         public void Update(Despesa despesa)
         {
             _dbContext.Despesas.Update(despesa);
+        }
+
+        public async Task<List<Despesa>> GetByMes(DateOnly mes)
+        {
+            var dataInicial = new DateTime(year: mes.Year, month: mes.Month, day: 1).Date;
+            var ultimoDiaMesInformado = DateTime.DaysInMonth(year: mes.Year, month: mes.Month);
+            var dataFinal = new DateTime(year: mes.Year, month: mes.Month, day: ultimoDiaMesInformado, hour: 23, minute: 59, second: 59);
+
+            return await _dbContext
+                .Despesas
+                .AsNoTracking()
+                .Where(x => x.Data >= dataInicial && x.Data <= dataFinal)
+                .OrderBy(x => x.Data)
+                .ThenBy(x => x.Titulo)
+                .ToListAsync();
         }
     }
 }
