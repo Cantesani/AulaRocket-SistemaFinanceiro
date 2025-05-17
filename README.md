@@ -19,7 +19,7 @@ Dentre os pacotes NuGet utilizados, o **AutoMapper** é responsável pelo mapeam
  ### Requisitos
 
  * Visual Studio versão 2022+ ou Visual Studio Code
- * Windows 10+ ou Linux/MacOS com [.NET SDK](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0) instalado
+ * Windows 10+ ou Linux/MacOS com [.NET SDK][dot-net-sdk] instalado
  * MySQL Server
 
  ### Instalação
@@ -31,3 +31,8 @@ Dentre os pacotes NuGet utilizados, o **AutoMapper** é responsável pelo mapeam
 
  2. Preencha as informações no arquivo `appsettings.Develompent.json`. 
  3. Execute a API e aproveite o teste :)
+
+
+
+<!-- Links -->
+[dot-net-sdk]: https://dotnet.microsoft.com/pt-br/download/dotnet/8.0
