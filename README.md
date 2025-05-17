@@ -12,3 +12,22 @@ Dentre os pacotes NuGet utilizados, o **AutoMapper** é responsável pelo mapeam
 - **Geração de relatórios:** Capacidade de exportar relatórios detalhados para **PDF** e **Excel**, oferecendo uma análise visual e eficaz das despesas.
 - **RESTFul API com Documentação Swagger:** Interface documentada que facilita a integração e o teste por parte dos desenvolvedores.
 
+ ## Getting Started
+
+ Para obter uma cópia local funcionando, siga estes passos simples.
+
+ ### Requisitos
+
+ * Visual Studio versão 2022+ ou Visual Studio Code
+ * Windows 10+ ou Linux/MacOS com [.NET SDK](https://dotnet.microsoft.com/pt-br/download/dotnet/8.0) instalado
+ * MySQL Server
+
+ ### Instalação
+
+ 1. Clone o repositório:
+    ```sh
+    git clone https://github.com/Cantesani/AulaRocket-SistemaFinanceiro.git
+    ```
+
+ 2. Preencha as informações no arquivo `appsettings.Develompent.json`. 
+ 3. Execute a API e aproveite o teste :)
