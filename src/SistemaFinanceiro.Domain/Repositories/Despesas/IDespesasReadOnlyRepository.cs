@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SistemaFinanceiro.Domain.Entities;
+﻿using SistemaFinanceiro.Domain.Entities;
 
 namespace SistemaFinanceiro.Domain.Repositories.Despesas
 {

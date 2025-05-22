@@ -7,16 +7,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="UseCases\Despesas\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <None Remove="UseCases\Despesas\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <None Remove="UseCases\Despesas\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <None Remove="UseCases\Despesas\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="UseCases\Despesas\Reports\Pdf\Fonts\Raleway-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Despesas\Reports\Pdf\Fonts\Raleway-Regular.ttf" />
+    <EmbeddedResource Include="UseCases\Despesas\Reports\Pdf\Fonts\WorkSans-Black.ttf" />
+    <EmbeddedResource Include="UseCases\Despesas\Reports\Pdf\Fonts\WorkSans-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="PDFsharp-MigraDoc" Version="6.1.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SistemaFinanceiro.Communication\SistemaFinanceiro.Communication.csproj" />
     <ProjectReference Include="..\SistemaFinanceiro.Domain\SistemaFinanceiro.Domain.csproj" />
     <ProjectReference Include="..\SistemaFinanceiro.Exception\SistemaFinanceiro.Exception.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Img\Capture.PNG">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

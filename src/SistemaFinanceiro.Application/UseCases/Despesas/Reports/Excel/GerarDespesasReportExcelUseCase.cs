@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using SistemaFinanceiro.Domain.Enums;
+using SistemaFinanceiro.Domain.Enums.Extensions;
 using SistemaFinanceiro.Domain.Reports;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 
@@ -37,7 +38,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel
             {
                 worksheet.Cell($"A{contador}").Value = despesa.Titulo;
                 worksheet.Cell($"B{contador}").Value = despesa.Data;
-                worksheet.Cell($"C{contador}").Value = ConverteTipoPagamento(despesa.TipoPagto);
+                worksheet.Cell($"C{contador}").Value = despesa.TipoPagto.TipoPagtoToString();
 
                 worksheet.Cell($"D{contador}").Value = despesa.Valor;
                 worksheet.Cell($"D{contador}").Style.NumberFormat.Format = $"-{CURRENCY_SYMBOL} #,##0.00";
@@ -74,18 +75,5 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel
             worksheet.Cell("D1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Right);
             worksheet.Cell("E1").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
         }
-
-        private string ConverteTipoPagamento(TipoPagto pagamento)
-        {
-            return pagamento switch
-            {
-                TipoPagto.Dinheiro => ResourceReportGenerationMessages.DINHEIRO,
-                TipoPagto.Debito => ResourceReportGenerationMessages.DEBITO,
-                TipoPagto.Credito => ResourceReportGenerationMessages.CREDITO,
-                TipoPagto.Pix => ResourceReportGenerationMessages.PIX,
-                _ => string.Empty
-            };
-        }
-
     }
 }

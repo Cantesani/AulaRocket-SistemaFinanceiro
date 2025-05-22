@@ -97,6 +97,15 @@ namespace SistemaFinanceiro.Domain.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Despesa para.
+        /// </summary>
+        public static string DESPESA_PARA {
+            get {
+                return ResourceManager.GetString("DESPESA_PARA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dinheiro.
         /// </summary>
         public static string DINHEIRO {
@@ -115,6 +124,15 @@ namespace SistemaFinanceiro.Domain.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Olá, {0}.
+        /// </summary>
+        public static string SAUDACAO {
+            get {
+                return ResourceManager.GetString("SAUDACAO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tipo_Pagto.
         /// </summary>
         public static string TIPO_PAGTO {
@@ -129,6 +147,15 @@ namespace SistemaFinanceiro.Domain.Reports {
         public static string TITULO {
             get {
                 return ResourceManager.GetString("TITULO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total gasto em {0}.
+        /// </summary>
+        public static string TOTAL_GASTO_EM {
+            get {
+                return ResourceManager.GetString("TOTAL_GASTO_EM", resourceCulture);
             }
         }
         
