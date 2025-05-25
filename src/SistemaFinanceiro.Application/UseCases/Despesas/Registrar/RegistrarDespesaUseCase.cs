@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SistemaFinanceiro.Communication.Requests;
-using SistemaFinanceiro.Communication.Responses;
+using SistemaFinanceiro.Communication.Requests.Despesas;
+using SistemaFinanceiro.Communication.Responses.Despesas;
 using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;

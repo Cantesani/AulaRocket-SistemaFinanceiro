@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using SistemaFinanceiro.Communication.Responses;
 using SistemaFinanceiro.Exception;
 using SistemaFinanceiro.Exception.ExceptionBase;

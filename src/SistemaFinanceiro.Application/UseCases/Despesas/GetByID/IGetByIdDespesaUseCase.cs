@@ -1,4 +1,4 @@
-﻿using SistemaFinanceiro.Communication.Responses;
+﻿using SistemaFinanceiro.Communication.Responses.Despesas;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.GetByID
 {

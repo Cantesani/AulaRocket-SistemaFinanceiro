@@ -1,11 +1,12 @@
-﻿using SistemaFinanceiro.Domain.Reports;
+﻿using SistemaFinanceiro.Domain.Enums;
+using SistemaFinanceiro.Domain.Reports;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SistemaFinanceiro.Domain.Enums.Extensions
+namespace SistemaFinanceiro.Domain.Extensions
 {
     public static class TipoPagtoExtensions
     {

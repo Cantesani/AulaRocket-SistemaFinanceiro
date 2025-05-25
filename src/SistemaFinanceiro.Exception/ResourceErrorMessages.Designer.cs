@@ -79,11 +79,56 @@ namespace SistemaFinanceiro.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Este email já está sendo utilizado..
+        /// </summary>
+        public static string EMAIL_JA_EXISTE {
+            get {
+                return ResourceManager.GetString("EMAIL_JA_EXISTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O email não pode ser vazio..
+        /// </summary>
+        public static string EMAIL_USUARIO_EMPTY {
+            get {
+                return ResourceManager.GetString("EMAIL_USUARIO_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O email é inválido..
+        /// </summary>
+        public static string EMAIL_USUARIO_INVALIDO {
+            get {
+                return ResourceManager.GetString("EMAIL_USUARIO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Erro desconhecido..
         /// </summary>
         public static string ERRO_DESCONHECIDO {
             get {
                 return ResourceManager.GetString("ERRO_DESCONHECIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O nome  do usuário é obrigatório..
+        /// </summary>
+        public static string NOME_USUARIO_OBRIGATORIO {
+            get {
+                return ResourceManager.GetString("NOME_USUARIO_OBRIGATORIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (exemplo: !, ?, @, *).
+        /// </summary>
+        public static string PASSWORD_USER_INVALIDO {
+            get {
+                return ResourceManager.GetString("PASSWORD_USER_INVALIDO", resourceCulture);
             }
         }
         

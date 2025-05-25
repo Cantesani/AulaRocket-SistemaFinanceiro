@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using SistemaFinanceiro.Communication.Requests;
-using SistemaFinanceiro.Communication.Responses;
+using SistemaFinanceiro.Communication.Requests.Despesas;
+using SistemaFinanceiro.Communication.Requests.Users;
+using SistemaFinanceiro.Communication.Responses.Despesas;
+using SistemaFinanceiro.Communication.Responses.Users;
 using SistemaFinanceiro.Domain.Entities;
 
 namespace SistemaFinanceiro.Application.AutoMapper
@@ -14,10 +16,11 @@ namespace SistemaFinanceiro.Application.AutoMapper
             EntityToResponse();
         }
 
-
         private void RequestToEntity()
         {
             CreateMap<RequestDespesaJson, Despesa>();
+            CreateMap<RequestRegistraUserJson, User>()
+                .ForMember(dest => dest.Password, config => config.Ignore());
         }
 
         private void EntityToResponse()

@@ -2,6 +2,7 @@ using SistemaFinanceiro.Api.Filtros;
 using SistemaFinanceiro.Api.MiddleWare;
 using SistemaFinanceiro.Application;
 using SistemaFinanceiro.Infrastructure;
+using SistemaFinanceiro.Infrastructure.Migrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,4 +34,16 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+MigrateDataBase();
+
 app.Run();
+
+
+
+async Task MigrateDataBase()
+{
+    await using var scope = app.Services.CreateAsyncScope();
+
+    await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
+
+}

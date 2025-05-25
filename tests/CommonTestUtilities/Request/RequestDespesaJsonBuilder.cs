@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using SistemaFinanceiro.Communication.Enums;
-using SistemaFinanceiro.Communication.Requests;
+using SistemaFinanceiro.Communication.Requests.Despesas;
 
 namespace CommonTestUtilities.Request
 {

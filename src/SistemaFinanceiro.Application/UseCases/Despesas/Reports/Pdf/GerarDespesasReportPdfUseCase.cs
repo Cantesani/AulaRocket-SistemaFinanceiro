@@ -5,7 +5,7 @@ using PdfSharp.Fonts;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf.Colors;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf.Fonts;
 using SistemaFinanceiro.Domain.Entities;
-using SistemaFinanceiro.Domain.Enums.Extensions;
+using SistemaFinanceiro.Domain.Extensions;
 using SistemaFinanceiro.Domain.Reports;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 using System.Reflection;

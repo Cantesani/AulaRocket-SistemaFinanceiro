@@ -1,5 +1,5 @@
-﻿using SistemaFinanceiro.Communication.Requests;
-using SistemaFinanceiro.Communication.Responses;
+﻿using SistemaFinanceiro.Communication.Requests.Despesas;
+using SistemaFinanceiro.Communication.Responses.Despesas;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
 {

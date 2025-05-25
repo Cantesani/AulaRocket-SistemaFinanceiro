@@ -123,8 +123,20 @@
   <data name="DESPESA_NAO_ENCONTRADA" xml:space="preserve">
     <value>Despesa não encontrada.</value>
   </data>
+  <data name="EMAIL_USUARIO_INVALIDO" xml:space="preserve">
+    <value>O email é inválido.</value>
+  </data>
+  <data name="EMAIL_USUARIO_EMPTY" xml:space="preserve">
+    <value>O email não pode ser vazio.</value>
+  </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
+  </data>
+  <data name="NOME_USUARIO_OBRIGATORIO" xml:space="preserve">
+    <value>O nome  do usuário é obrigatório.</value>
+  </data>
+  <data name="PASSWORD_USER_INVALIDO" xml:space="preserve">
+    <value>Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (exemplo: !, ?, @, *)</value>
   </data>
   <data name="TIPO_PAGAMENTO_INVALIDO" xml:space="preserve">
     <value>Tipo de pagamento invalido.</value>
@@ -134,5 +146,8 @@
   </data>
   <data name="VALOR_PRECISA_SER_MAIOR_QUE_ZERO" xml:space="preserve">
     <value>O valo precisa ser maior que 0.</value>
+  </data>
+  <data name="EMAIL_JA_EXISTE" xml:space="preserve">
+    <value>Este email já está sendo utilizado.</value>
   </data>
 </root>

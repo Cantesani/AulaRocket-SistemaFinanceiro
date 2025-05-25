@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SistemaFinanceiro.Application.UseCases.Despesas;
 using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Application.UseCases.Despesas.Update;
-using SistemaFinanceiro.Communication.Requests;
+using SistemaFinanceiro.Communication.Requests.Despesas;
 using SistemaFinanceiro.Communication.Responses;
+using SistemaFinanceiro.Communication.Responses.Despesas;
 
 namespace SistemaFinanceiro.Api.Controllers
 {
@@ -20,7 +20,7 @@ namespace SistemaFinanceiro.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Registra(
                                 [FromServices] IRegistrarDespesaUseCase useCase
-                               , [FromBody] RequestDespesaJson request)
+                               ,[FromBody] RequestDespesaJson request)
         {
             var response = await useCase.Execute(request);
 

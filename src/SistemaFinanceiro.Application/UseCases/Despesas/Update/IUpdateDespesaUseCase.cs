@@ -1,4 +1,4 @@
-﻿using SistemaFinanceiro.Communication.Requests;
+﻿using SistemaFinanceiro.Communication.Requests.Despesas;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.Update
 {

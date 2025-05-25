@@ -1,12 +1,11 @@
 ﻿using SistemaFinanceiro.Communication.Enums;
 
-namespace SistemaFinanceiro.Communication.Responses
+namespace SistemaFinanceiro.Communication.Requests.Despesas
 {
-    public class ResponseDespesaJson
+    public class RequestDespesaJson
     {
-        public long Id { get; set; }
         public string Titulo { get; set; } = string.Empty;
-        public string? Descricao { get; set; }
+        public string Descricao { get; set; } = string.Empty;
         public decimal Valor { get; set; }
         public DateTime Data { get; set; }
         public TipoPagto TipoPagto { get; set; }

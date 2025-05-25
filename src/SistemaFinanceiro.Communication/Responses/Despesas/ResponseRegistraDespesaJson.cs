@@ -1,6 +1,6 @@
 ﻿using SistemaFinanceiro.Communication.Enums;
 
-namespace SistemaFinanceiro.Communication.Responses
+namespace SistemaFinanceiro.Communication.Responses.Despesas
 {
     public class ResponseRegistraDespesaJson
     {

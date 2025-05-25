@@ -1,6 +1,6 @@
 ﻿using ClosedXML.Excel;
 using SistemaFinanceiro.Domain.Enums;
-using SistemaFinanceiro.Domain.Enums.Extensions;
+using SistemaFinanceiro.Domain.Extensions;
 using SistemaFinanceiro.Domain.Reports;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 

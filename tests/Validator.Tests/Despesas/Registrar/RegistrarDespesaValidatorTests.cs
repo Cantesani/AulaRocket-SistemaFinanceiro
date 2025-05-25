@@ -1,6 +1,7 @@
 ﻿using CommonTestUtilities.Request;
 using FluentAssertions;
 using SistemaFinanceiro.Application.UseCases.Despesas;
+using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Communication.Enums;
 using SistemaFinanceiro.Exception;
 

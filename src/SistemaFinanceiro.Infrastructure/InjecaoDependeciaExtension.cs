@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
+using SistemaFinanceiro.Domain.Repositories.Users;
+using SistemaFinanceiro.Domain.Security.Criptografia;
 using SistemaFinanceiro.Infrastructure.DataAccess;
 using SistemaFinanceiro.Infrastructure.DataAccess.Repositories;
 
@@ -19,6 +21,8 @@ namespace SistemaFinanceiro.Infrastructure
         {
             AddDbContext(services, configuration);
             AddRepositories(services);
+
+            services.AddScoped<IPasswordCriptografada, Security.BCrypt>();
         }
 
         private static void AddRepositories(IServiceCollection services)
@@ -27,6 +31,8 @@ namespace SistemaFinanceiro.Infrastructure
             services.AddScoped<IDespesasReadOnlyRepository, DespesasRepository>();
             services.AddScoped<IDespesasWriteOnlyRepository, DespesasRepository>();
             services.AddScoped<IDespesaUpdateOnlyRepository, DespesasRepository>();
+            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)

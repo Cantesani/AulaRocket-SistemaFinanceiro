@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
-using SistemaFinanceiro.Communication.Requests;
+using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
+using SistemaFinanceiro.Communication.Requests.Despesas;
 using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 using SistemaFinanceiro.Exception;

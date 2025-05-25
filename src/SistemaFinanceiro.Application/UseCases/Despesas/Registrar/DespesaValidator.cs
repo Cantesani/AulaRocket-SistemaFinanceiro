@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using SistemaFinanceiro.Communication.Requests;
+using SistemaFinanceiro.Communication.Requests.Despesas;
 using SistemaFinanceiro.Exception;
 
-namespace SistemaFinanceiro.Application.UseCases.Despesas
+namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
 {
     public class DespesaValidator : AbstractValidator<RequestDespesaJson>
     {

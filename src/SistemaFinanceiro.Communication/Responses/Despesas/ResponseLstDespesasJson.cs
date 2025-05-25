@@ -1,4 +1,4 @@
-﻿namespace SistemaFinanceiro.Communication.Responses
+﻿namespace SistemaFinanceiro.Communication.Responses.Despesas
 {
     public class ResponseLstDespesasJson
     {

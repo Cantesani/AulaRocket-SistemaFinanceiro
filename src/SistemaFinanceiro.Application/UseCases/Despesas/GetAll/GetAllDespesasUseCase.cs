@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SistemaFinanceiro.Communication.Responses;
+using SistemaFinanceiro.Communication.Responses.Despesas;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.GetAll
