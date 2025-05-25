@@ -5,8 +5,11 @@ using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 using SistemaFinanceiro.Domain.Repositories.Users;
 using SistemaFinanceiro.Domain.Security.Criptografia;
+using SistemaFinanceiro.Domain.Security.Tokens;
 using SistemaFinanceiro.Infrastructure.DataAccess;
 using SistemaFinanceiro.Infrastructure.DataAccess.Repositories;
+using SistemaFinanceiro.Infrastructure.Security.Tokens;
+using System.ComponentModel;
 
 namespace SistemaFinanceiro.Infrastructure
 {
@@ -21,8 +24,18 @@ namespace SistemaFinanceiro.Infrastructure
         {
             AddDbContext(services, configuration);
             AddRepositories(services);
+            AddToken(services, configuration);
 
-            services.AddScoped<IPasswordCriptografada, Security.BCrypt>();
+            services.AddScoped<IPasswordCriptografada, Security.Criptografia.BCrypt>();
+        }
+
+        private static void AddToken(IServiceCollection services, IConfiguration configuration)
+        {
+            var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpiresMinutes");
+            var signinKey = configuration.GetValue<string>("Settings:Jwt:SigninKey");
+
+            services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signinKey!));
+
         }
 
         private static void AddRepositories(IServiceCollection services)

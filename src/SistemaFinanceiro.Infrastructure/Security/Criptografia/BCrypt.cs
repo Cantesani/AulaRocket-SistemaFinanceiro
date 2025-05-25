@@ -1,7 +1,7 @@
 ﻿using SistemaFinanceiro.Domain.Security.Criptografia;
 using BC = BCrypt.Net.BCrypt;
 
-namespace SistemaFinanceiro.Infrastructure.Security
+namespace SistemaFinanceiro.Infrastructure.Security.Criptografia
 {
     public class BCrypt : IPasswordCriptografada
     {
