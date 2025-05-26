@@ -7,6 +7,7 @@ using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf;
 using SistemaFinanceiro.Application.UseCases.Despesas.Update;
+using SistemaFinanceiro.Application.UseCases.Login;
 using SistemaFinanceiro.Application.UseCases.Users.Registrar;
 
 namespace SistemaFinanceiro.Application
@@ -40,6 +41,7 @@ namespace SistemaFinanceiro.Application
             services.AddScoped<IGerarDespesasReportExcelUseCase, GerarDespesasReportExcelUseCase>();
             services.AddScoped<IGerarDespesasReportPdfUseCase, GerarDespesasReportPdfUseCase>();
             services.AddScoped<IRegistraUserUseCase, RegistrarUserUseCase>();
+            services.AddScoped<ILoginUseCase, LoginUseCase>();
         }
 
     }

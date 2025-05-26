@@ -8,8 +8,12 @@ namespace SistemaFinanceiro.Infrastructure.Security.Criptografia
         public string Criptografar(string password)
         {
             string passwordHash = BC.HashPassword(password);
-             
             return passwordHash;
+        }
+
+        public bool VerificaSenha(string password, string passwordHash)
+        {
+            return BC.Verify(password, passwordHash);
         }
     }
 }

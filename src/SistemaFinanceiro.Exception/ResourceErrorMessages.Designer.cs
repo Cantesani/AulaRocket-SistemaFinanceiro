@@ -88,6 +88,15 @@ namespace SistemaFinanceiro.Exception {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email e/ou senha inválidos..
+        /// </summary>
+        public static string EMAIL_OU_SENHA_INVALIDOS {
+            get {
+                return ResourceManager.GetString("EMAIL_OU_SENHA_INVALIDOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O email não pode ser vazio..
         /// </summary>
         public static string EMAIL_USUARIO_EMPTY {

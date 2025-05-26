@@ -27,6 +27,11 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
         {
             return await _dbContext.Users.AsNoTracking().AnyAsync(x => x.Email.Equals(email));
         }
+
+        public async Task<User?> GetUserByEmail(string email)
+        {
+            return await _dbContext.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Email.Equals(email));
+        }
     }
 }
- 
+  

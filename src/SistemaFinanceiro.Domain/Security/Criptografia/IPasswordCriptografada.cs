@@ -9,5 +9,6 @@ namespace SistemaFinanceiro.Domain.Security.Criptografia
     public interface IPasswordCriptografada
     {
         public string Criptografar(string password);
+        public bool VerificaSenha(string password, string passwordHash);
     }
 }

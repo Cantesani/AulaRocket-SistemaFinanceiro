@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SistemaFinanceiro.Domain.Entities;
 
 namespace SistemaFinanceiro.Domain.Repositories.Users
 {
     public interface IUserReadOnlyRepository
     {
         public Task<bool> ExisteUserComEsseEmail(string email);
+
+        public Task<User?> GetUserByEmail(string email);
     }
 }
