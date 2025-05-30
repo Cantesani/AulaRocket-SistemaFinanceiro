@@ -26,7 +26,7 @@ namespace SistemaFinanceiro.Application.UseCases.Users.Registrar
                                    ,IUserReadOnlyRepository userReadOnlyRepository
                                    ,IUserWriteOnlyRepository userWriteOnlyRepository
                                    ,IAccessTokenGenerator tokenGenerator
-                                   , IUnidadeDeTrabalho unidadeDeTrabalho)
+                                   ,IUnidadeDeTrabalho unidadeDeTrabalho)
         {
             _imapper = imapper;
             _passwordCriptografada = passwordCriptografada;
@@ -57,7 +57,7 @@ namespace SistemaFinanceiro.Application.UseCases.Users.Registrar
 
         public async Task Validate(RequestRegistraUserJson request)
         {
-            var result = new UserValidator().Validate(request);
+            var result = new RegistrarUserValidator().Validate(request);
             var existeEmail =  await _userReadOnlyRepository.ExisteUserComEsseEmail(request.Email);
 
             if (existeEmail)

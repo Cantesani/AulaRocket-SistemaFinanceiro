@@ -135,9 +135,9 @@ namespace SistemaFinanceiro.Exception {
         /// <summary>
         ///   Looks up a localized string similar to Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (exemplo: !, ?, @, *).
         /// </summary>
-        public static string PASSWORD_USER_INVALIDO {
+        public static string SENHA_USER_INVALIDO {
             get {
-                return ResourceManager.GetString("PASSWORD_USER_INVALIDO", resourceCulture);
+                return ResourceManager.GetString("SENHA_USER_INVALIDO", resourceCulture);
             }
         }
         

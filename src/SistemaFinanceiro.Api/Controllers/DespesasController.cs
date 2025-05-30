@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaFinanceiro.Application.UseCases.Despesas.Delete;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetAll;
 using SistemaFinanceiro.Application.UseCases.Despesas.GetByID;
@@ -12,6 +13,7 @@ namespace SistemaFinanceiro.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
 
     public class DespesasController : ControllerBase
     {

@@ -32,7 +32,7 @@ namespace SistemaFinanceiro.Application.UseCases.Users
                !Regex.IsMatch(password, @"[1-9]+") ||
                !Regex.IsMatch(password, @"[\!\?\@\*]+"))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.PASSWORD_USER_INVALIDO);
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.SENHA_USER_INVALIDO);
                 return false;
             }
 

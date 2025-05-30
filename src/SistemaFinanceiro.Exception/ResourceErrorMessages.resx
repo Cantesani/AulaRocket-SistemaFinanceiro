@@ -135,7 +135,7 @@
   <data name="NOME_USUARIO_OBRIGATORIO" xml:space="preserve">
     <value>O nome  do usuário é obrigatório.</value>
   </data>
-  <data name="PASSWORD_USER_INVALIDO" xml:space="preserve">
+  <data name="SENHA_USER_INVALIDO" xml:space="preserve">
     <value>Sua senha deve ter no mínimo 8 caracteres, contendo pelo menos uma letra maiúscula, uma letra minúscula, um número e um caractere especial (exemplo: !, ?, @, *)</value>
   </data>
   <data name="TIPO_PAGAMENTO_INVALIDO" xml:space="preserve">

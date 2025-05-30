@@ -14,7 +14,7 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new DespesaValidator();
-            var request = RequestDespesaJsonBuilder.Builder();
+            var request = RequestRegistrarDespesaJsonBuilder.Builder();
 
             //ACT
             var result = validator.Validate(request);
@@ -31,7 +31,7 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new DespesaValidator();
-            var request = RequestDespesaJsonBuilder.Builder();
+            var request = RequestRegistrarDespesaJsonBuilder.Builder();
             request.Titulo = titulo;
 
             //ACT
@@ -47,7 +47,7 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new DespesaValidator();
-            var request = RequestDespesaJsonBuilder.Builder();
+            var request = RequestRegistrarDespesaJsonBuilder.Builder();
             request.Data = DateTime.Now.AddDays(1);
 
             //ACT
@@ -63,7 +63,7 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new DespesaValidator();
-            var request = RequestDespesaJsonBuilder.Builder();
+            var request = RequestRegistrarDespesaJsonBuilder.Builder();
             request.TipoPagto = (TipoPagto)50;
 
             //ACT
@@ -81,7 +81,7 @@ namespace Validator.Tests.Despesas.Registrar
         {
             //ARANGE
             var validator = new DespesaValidator();
-            var request = RequestDespesaJsonBuilder.Builder();
+            var request = RequestRegistrarDespesaJsonBuilder.Builder();
             request.Valor = valor;
 
             //ACT

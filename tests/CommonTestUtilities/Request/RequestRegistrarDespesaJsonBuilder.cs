@@ -4,7 +4,7 @@ using SistemaFinanceiro.Communication.Requests.Despesas;
 
 namespace CommonTestUtilities.Request
 {
-    public class RequestDespesaJsonBuilder
+    public class RequestRegistrarDespesaJsonBuilder
     {
         public static RequestDespesaJson Builder()
         {
