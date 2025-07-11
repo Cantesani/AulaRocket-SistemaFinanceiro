@@ -28,6 +28,7 @@ namespace SistemaFinanceiro.Application.AutoMapper
             CreateMap<Despesa, ResponseLstDespesasJson>();
             CreateMap<Despesa, ResponseShortDespesaJson>();
             CreateMap<Despesa, ResponseDespesaJson>();
+            CreateMap<User, ResponseUserProfileJson>();
         }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using SistemaFinanceiro.Communication.Requests.Users;
 using SistemaFinanceiro.Communication.Responses.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SistemaFinanceiro.Application.UseCases.Users.Registrar
 {

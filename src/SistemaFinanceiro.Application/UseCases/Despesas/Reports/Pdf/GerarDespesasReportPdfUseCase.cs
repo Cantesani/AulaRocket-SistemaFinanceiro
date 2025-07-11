@@ -8,35 +8,41 @@ using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Extensions;
 using SistemaFinanceiro.Domain.Reports;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
+using SistemaFinanceiro.Domain.Services.LoggerUser;
 using System.Reflection;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
 {
     public class GerarDespesasReportPdfUseCase : IGerarDespesasReportPdfUseCase
     {
+        private readonly ILoggedUser _loggedUser;
         private readonly IDespesasReadOnlyRepository _repository;
         private const string CURRENCY_SYMBOL = "R$";
         private const int HEIHT_LINHA_TABELA = 25;
 
-        public GerarDespesasReportPdfUseCase(IDespesasReadOnlyRepository repository)
+        public GerarDespesasReportPdfUseCase(ILoggedUser loggerUser,
+                                             IDespesasReadOnlyRepository repository)
         {
+            _loggedUser = loggerUser;
             _repository = repository;
             GlobalFontSettings.FontResolver = new DespesasReportFontResolver();
         }
 
         public async Task<Byte[]> Execute(DateOnly mes)
         {
-            var despesas = await _repository.GetByMes(mes);
+            var user = await _loggedUser.Get();
+
+            var despesas = await _repository.GetByMes(user, mes);
 
             if (despesas.Count == 0)
             {
                 return [];
             }
 
-            var documento = CreateDocument(mes);
+            var documento = CreateDocument(mes, user.Nome );
             var page = CreatePage(documento);
 
-            CreateHeaderComFotoENome(page);
+            CreateHeaderComFotoENome(page, user.Nome);
 
             var totalDespesas = despesas.Sum(x => x.Valor);
             CreateTotalGasto(page, mes, totalDespesas);
@@ -90,16 +96,14 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
                 AddEspacoBranco(tabela);
             }
 
-
-
             return RenderizarDocumento(documento);
         }
 
-        private Document CreateDocument(DateOnly mes)
+        private Document CreateDocument(DateOnly mes, string author)
         {
             var documento = new Document();
             documento.Info.Title = $"{ResourceReportGenerationMessages.DESPESA_PARA} {mes.ToString("Y")}";
-            documento.Info.Author = "Gabriel Cantesani";
+            documento.Info.Author = author;
 
             var style = documento.Styles["Normal"];
             style!.Font.Name = FontHelper.RALEWAY_REGULAR;
@@ -121,7 +125,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
             return section;
         }
 
-        private void CreateHeaderComFotoENome(Section page)
+        private void CreateHeaderComFotoENome(Section page, string nome)
         {
             var tabela = page.AddTable();
             tabela.AddColumn();
@@ -135,8 +139,8 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
 
             linha.Cells[0].AddImage(PathFile);
 
-            var saudacao = string.Format(ResourceReportGenerationMessages.SAUDACAO, "Gabriel Cantesani");
-            linha.Cells[1].AddParagraph().AddFormattedText(saudacao, new Font { Name = FontHelper.RALEWAY_BLACK, Size = 16 });
+            linha.Cells[1].AddParagraph($"Hey, {nome}");
+            linha.Cells[1].Format.Font = new Font { Name = FontHelper.RALEWAY_BLACK, Size = 16 };
             linha.Cells[1].VerticalAlignment = MigraDoc.DocumentObjectModel.Tables.VerticalAlignment.Center;
         }
 
@@ -152,7 +156,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
             paragrafo.AddLineBreak();
 
 
-            paragrafo.AddFormattedText($"{CURRENCY_SYMBOL} {totalDespesas}", new Font { Name = FontHelper.WORKSANS_BLACK, Size = 50 });
+            paragrafo.AddFormattedText($"{CURRENCY_SYMBOL} {totalDespesas:f2}", new Font { Name = FontHelper.WORKSANS_BLACK, Size = 50 });
         }
 
         private Table CreateDespesasTable(Section page)
@@ -187,7 +191,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf
 
         private void AddBodyValorTablesDespesa(Cell cell, decimal valorDespesa)
         {
-            cell.AddParagraph($"-{valorDespesa.ToString("C")}");
+            cell.AddParagraph($"-{valorDespesa:f2}");
             cell.Format.Font = new Font { Name = FontHelper.WORKSANS_REGULAR, Size = 14, Color = ColorsHelper.BLACK };
             cell.Shading.Color = ColorsHelper.WHITE;
             cell.VerticalAlignment = VerticalAlignment.Center;

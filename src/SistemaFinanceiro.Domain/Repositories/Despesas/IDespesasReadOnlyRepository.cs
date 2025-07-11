@@ -4,8 +4,8 @@ namespace SistemaFinanceiro.Domain.Repositories.Despesas
 {
     public interface IDespesasReadOnlyRepository
     {
-        public Task<List<Despesa>> GetAll();
-        public Task<Despesa?> GetById(long id);
-        public Task<List<Despesa>> GetByMes(DateOnly mes);
+        public Task<List<Despesa>> GetAll(long userId);
+        public Task<Despesa?> GetById(long id, long userId);
+        public Task<List<Despesa>> GetByMes(Entities.User user, DateOnly mes);
     }
 }

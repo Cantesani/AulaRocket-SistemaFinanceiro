@@ -6,10 +6,12 @@ using SistemaFinanceiro.Domain.Repositories.Despesas;
 using SistemaFinanceiro.Domain.Repositories.Users;
 using SistemaFinanceiro.Domain.Security.Criptografia;
 using SistemaFinanceiro.Domain.Security.Tokens;
+using SistemaFinanceiro.Domain.Services.LoggerUser;
 using SistemaFinanceiro.Infrastructure.DataAccess;
 using SistemaFinanceiro.Infrastructure.DataAccess.Repositories;
+using SistemaFinanceiro.Infrastructure.Extensions;
 using SistemaFinanceiro.Infrastructure.Security.Tokens;
-using System.ComponentModel;
+using SistemaFinanceiro.Infrastructure.Services.LoggerUser;
 
 namespace SistemaFinanceiro.Infrastructure
 {
@@ -22,11 +24,18 @@ namespace SistemaFinanceiro.Infrastructure
         // 3 - Colocar modificador 'THIS', como parametro
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            AddDbContext(services, configuration);
+            services.AddScoped<IPasswordCriptografada, Security.Criptografia.BCrypt>();
+            services.AddScoped<ILoggedUser, LoggedUser>();
+
             AddRepositories(services);
             AddToken(services, configuration);
 
-            services.AddScoped<IPasswordCriptografada, Security.Criptografia.BCrypt>();
+            //verifica se o sistema esta rodando em test ou nao.
+            //case seja em teste, nao chama o dbContext.
+            if (!configuration.IsTestEnvironment())
+            {
+                AddDbContext(services, configuration);
+            }
         }
 
         private static void AddToken(IServiceCollection services, IConfiguration configuration)
@@ -46,18 +55,16 @@ namespace SistemaFinanceiro.Infrastructure
             services.AddScoped<IDespesaUpdateOnlyRepository, DespesasRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
         }
 
         private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("Connection");
 
-            var Version = new Version(8, 0, 42);
-            var serverVersion = new MySqlServerVersion(Version);
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
 
             services.AddDbContext<SistemaFinanceiroDbContext>(config => config.UseMySql(connectionString, serverVersion));
         }
-
-
     }
 }

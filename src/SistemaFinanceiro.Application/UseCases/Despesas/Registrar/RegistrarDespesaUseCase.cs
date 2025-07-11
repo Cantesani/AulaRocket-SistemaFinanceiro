@@ -4,6 +4,7 @@ using SistemaFinanceiro.Communication.Responses.Despesas;
 using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
+using SistemaFinanceiro.Domain.Services.LoggerUser;
 using SistemaFinanceiro.Exception.ExceptionBase;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
@@ -13,25 +14,31 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Registrar
         private readonly IDespesasWriteOnlyRepository _repository;
         private readonly IUnidadeDeTrabalho _unidadeDeTrabalho;
         private readonly IMapper _mapper;
+        private readonly ILoggedUser _loggedUser;
         public RegistrarDespesaUseCase(IDespesasWriteOnlyRepository repository,
                                        IUnidadeDeTrabalho unidadeDeTrabalho,
-                                       IMapper mapper)
+                                       IMapper mapper,
+                                       ILoggedUser loggedUser)
         {
             _repository = repository;
             _unidadeDeTrabalho = unidadeDeTrabalho;
             _mapper = mapper;
+            _loggedUser = loggedUser;
         }
 
         public async Task<ResponseDespesaJson> Execute(RequestDespesaJson request)
         {
             Validate(request);
 
-            var entity = _mapper.Map<Despesa>(request);
+            var despesa = _mapper.Map<Despesa>(request);
+            var loggedUser = await _loggedUser.Get();
 
-            await _repository.Add(entity);
+            despesa.UserId = loggedUser.Id;
+
+            await _repository.Add(despesa);
             await _unidadeDeTrabalho.Commit();
 
-            return _mapper.Map<ResponseDespesaJson>(entity);
+            return _mapper.Map<ResponseDespesaJson>(despesa);
         }
 
         public void Validate(RequestDespesaJson request)

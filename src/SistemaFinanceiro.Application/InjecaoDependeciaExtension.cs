@@ -8,7 +8,10 @@ using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf;
 using SistemaFinanceiro.Application.UseCases.Despesas.Update;
 using SistemaFinanceiro.Application.UseCases.Login;
+using SistemaFinanceiro.Application.UseCases.Users.Delete;
+using SistemaFinanceiro.Application.UseCases.Users.Profile;
 using SistemaFinanceiro.Application.UseCases.Users.Registrar;
+using SistemaFinanceiro.Application.UseCases.Users.Update;
 
 namespace SistemaFinanceiro.Application
 {
@@ -42,6 +45,10 @@ namespace SistemaFinanceiro.Application
             services.AddScoped<IGerarDespesasReportPdfUseCase, GerarDespesasReportPdfUseCase>();
             services.AddScoped<IRegistraUserUseCase, RegistrarUserUseCase>();
             services.AddScoped<ILoginUseCase, LoginUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+            services.AddScoped<IUpdateUserUseCase, UpdateUserUseCase>();
+            services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+
         }
 
     }

@@ -26,7 +26,8 @@ namespace SistemaFinanceiro.Infrastructure.Security.Tokens
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Name, user.Nome),
-                new Claim(ClaimTypes.Sid, user.UserIdentifier.ToString())
+                new Claim(ClaimTypes.Sid, user.UserIdentifier.ToString()),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor

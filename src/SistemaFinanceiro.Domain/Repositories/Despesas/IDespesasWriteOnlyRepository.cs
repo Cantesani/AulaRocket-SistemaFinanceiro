@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SistemaFinanceiro.Domain.Entities;
+﻿using SistemaFinanceiro.Domain.Entities;
 
 namespace SistemaFinanceiro.Domain.Repositories.Despesas
 {
@@ -16,6 +11,6 @@ namespace SistemaFinanceiro.Domain.Repositories.Despesas
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Task<bool> Delete(long id);
+        public Task Delete(long id);
     }
 }

@@ -3,7 +3,7 @@ using SistemaFinanceiro.Domain.Entities;
 
 namespace SistemaFinanceiro.Infrastructure.DataAccess
 {
-    internal class SistemaFinanceiroDbContext: DbContext
+    public class SistemaFinanceiroDbContext: DbContext
     {
         public SistemaFinanceiroDbContext(DbContextOptions options) : base(options) { }
 

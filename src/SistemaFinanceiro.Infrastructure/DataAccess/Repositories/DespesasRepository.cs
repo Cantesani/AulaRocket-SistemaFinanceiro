@@ -17,31 +17,29 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
             await _dbContext.Despesas.AddAsync(despesa);
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task Delete(long id)
         {
-            var result = await _dbContext.Despesas.FirstOrDefaultAsync(x => x.Id == id);
-
-            if (result is null)
-                return false;
-
-            _dbContext.Despesas.Remove(result);
-
-            return true;
+            var result = await _dbContext.Despesas.FindAsync(id);
+            _dbContext.Despesas.Remove(result!);
         }
 
-        public async Task<List<Despesa>> GetAll()
+        public async Task<List<Despesa>> GetAll(long userId)
         {
-            return await _dbContext.Despesas.AsNoTracking().ToListAsync();
+            return await _dbContext.Despesas.AsNoTracking().Where(x=>x.UserId == userId) .ToListAsync();
         }
 
-        async Task<Despesa?> IDespesasReadOnlyRepository.GetById(long id)
+        async Task<Despesa?> IDespesasReadOnlyRepository.GetById(long id, long userId)
         {
-            return await _dbContext.Despesas.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext.Despesas
+                .AsNoTracking()
+                 .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
-        async Task<Despesa?> IDespesaUpdateOnlyRepository.GetById(long id)
+        async Task<Despesa?> IDespesaUpdateOnlyRepository.GetById(long id, long userId)
         {
-            return await _dbContext.Despesas.FirstOrDefaultAsync(x => x.Id == id);
+            return await _dbContext
+                .Despesas
+                .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
         public void Update(Despesa despesa)
@@ -49,7 +47,7 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
             _dbContext.Despesas.Update(despesa);
         }
 
-        public async Task<List<Despesa>> GetByMes(DateOnly mes)
+        public async Task<List<Despesa>> GetByMes(User user, DateOnly mes)
         {
             var dataInicial = new DateTime(year: mes.Year, month: mes.Month, day: 1).Date;
             var ultimoDiaMesInformado = DateTime.DaysInMonth(year: mes.Year, month: mes.Month);
@@ -58,7 +56,7 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
             return await _dbContext
                 .Despesas
                 .AsNoTracking()
-                .Where(x => x.Data >= dataInicial && x.Data <= dataFinal)
+                .Where(x => x.UserId == user.Id && x.Data >= dataInicial && x.Data <= dataFinal)
                 .OrderBy(x => x.Data)
                 .ThenBy(x => x.Titulo)
                 .ToListAsync();

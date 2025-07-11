@@ -3,20 +3,26 @@ using SistemaFinanceiro.Domain.Enums;
 using SistemaFinanceiro.Domain.Extensions;
 using SistemaFinanceiro.Domain.Reports;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
+using SistemaFinanceiro.Domain.Services.LoggerUser;
 
 namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel
 {
     public class GerarDespesasReportExcelUseCase : IGerarDespesasReportExcelUseCase
     {
+        private readonly ILoggedUser _loggedUser;
         private readonly IDespesasReadOnlyRepository _repository;
         private const string CURRENCY_SYMBOL = "R$";
-        public GerarDespesasReportExcelUseCase(IDespesasReadOnlyRepository repository)
+        public GerarDespesasReportExcelUseCase(ILoggedUser loggerUser,
+                                               IDespesasReadOnlyRepository repository)
         {
             _repository = repository;
+            _loggedUser = loggerUser;
         }
         public async Task<byte[]> Execute(DateOnly mes)
         {
-            var despesas = await _repository.GetByMes(mes);
+            var user = await _loggedUser.Get();
+
+            var despesas = await _repository.GetByMes(user, mes);
 
             if (despesas.Count == 0)
             {
@@ -25,7 +31,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel
 
             using var workbook = new XLWorkbook();
 
-            workbook.Author = "Gabriel Cantesani";
+            workbook.Author = user.Nome;
             workbook.Style.Font.FontSize = 12;
             workbook.Style.Font.FontName = "Times New Roman";
 

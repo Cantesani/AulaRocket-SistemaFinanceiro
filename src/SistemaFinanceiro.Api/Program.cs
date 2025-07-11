@@ -3,8 +3,11 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SistemaFinanceiro.Api.Filtros;
 using SistemaFinanceiro.Api.MiddleWare;
+using SistemaFinanceiro.Api.Token;
 using SistemaFinanceiro.Application;
+using SistemaFinanceiro.Domain.Security.Tokens;
 using SistemaFinanceiro.Infrastructure;
+using SistemaFinanceiro.Infrastructure.Extensions;
 using SistemaFinanceiro.Infrastructure.Migrations;
 using System.Text;
 
@@ -53,6 +56,8 @@ builder.Services.AddMvc(option => option.Filters.Add(typeof(ExceptionFiltro)));
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 
+builder.Services.AddScoped<ITokenProvider, HttpContextTokenValue>();
+builder.Services.AddHttpContextAccessor();
 
 var signinKey = builder.Configuration.GetValue<string>("Settings:Jwt:SigninKey");
 
@@ -71,7 +76,6 @@ builder.Services.AddAuthentication(config =>
         };
     });
 
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -81,24 +85,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<CultureMiddleware>();
-
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
-await MigrateDataBase();
+//verifica se o sistema esta rodando em test ou nao.
+//case seja em teste, nao roda migration automatico.
+if (!builder.Configuration.IsTestEnvironment())
+{
+    await MigrateDataBase();
+}
 
 app.Run();
-
-
 
 async Task MigrateDataBase()
 {
     await using var scope = app.Services.CreateAsyncScope();
-
     await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
-
 }
+
+public partial class Program { }

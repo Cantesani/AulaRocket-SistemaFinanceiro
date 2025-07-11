@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Excel;
 using SistemaFinanceiro.Application.UseCases.Despesas.Reports.Pdf;
+using SistemaFinanceiro.Domain.Enums;
 using System.Net.Mime;
 
 namespace SistemaFinanceiro.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = Roles.ADMIN)]
     public class ReportController : ControllerBase
     {
         [HttpGet("excel")]
