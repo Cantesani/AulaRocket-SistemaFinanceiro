@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SistemaFinanceiro.Application.UseCases.Login;
 using SistemaFinanceiro.Communication.Requests.Login;
 using SistemaFinanceiro.Communication.Requests.Users;
