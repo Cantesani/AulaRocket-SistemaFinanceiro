@@ -27,7 +27,7 @@ namespace SistemaFinanceiro.Api.Controllers
 
             return NoContent();
         }
-
+ 
 
 
         [HttpGet("pdf")]

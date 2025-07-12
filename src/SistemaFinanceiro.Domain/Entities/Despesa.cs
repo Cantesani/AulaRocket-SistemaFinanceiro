@@ -11,6 +11,9 @@ namespace SistemaFinanceiro.Domain.Entities
         public DateTime Data { get; set; }
         public TipoPagto TipoPagto { get; set; }
 
+        public ICollection<Tag> Tags { get; set; } = [];
+        
+
         public long UserId { get; set; }
         public User User { get; set; } = default!;
     }

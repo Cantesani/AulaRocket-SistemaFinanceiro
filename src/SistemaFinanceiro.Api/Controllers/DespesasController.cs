@@ -20,7 +20,7 @@ namespace SistemaFinanceiro.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRegistraDespesaJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Registra(
+        public async Task<IActionResult> Registrar(
                                 [FromServices] IRegistrarDespesaUseCase useCase
                                ,[FromBody] RequestDespesaJson request)
         {
@@ -77,8 +77,6 @@ namespace SistemaFinanceiro.Api.Controllers
         {
 
             await useCase.Execute(id, request);
-
-
             return Ok();
         }
 

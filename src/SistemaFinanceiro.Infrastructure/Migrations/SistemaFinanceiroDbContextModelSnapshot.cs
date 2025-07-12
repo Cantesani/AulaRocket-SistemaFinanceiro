@@ -56,6 +56,27 @@ namespace SistemaFinanceiro.Infrastructure.Migrations
                     b.ToTable("Despesas");
                 });
 
+            modelBuilder.Entity("SistemaFinanceiro.Domain.Entities.Tag", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("DespesaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Valor")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DespesaId");
+
+                    b.ToTable("Tags", (string)null);
+                });
+
             modelBuilder.Entity("SistemaFinanceiro.Domain.Entities.User", b =>
                 {
                     b.Property<long>("Id")
@@ -85,7 +106,7 @@ namespace SistemaFinanceiro.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("User");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SistemaFinanceiro.Domain.Entities.Despesa", b =>
@@ -97,6 +118,22 @@ namespace SistemaFinanceiro.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SistemaFinanceiro.Domain.Entities.Tag", b =>
+                {
+                    b.HasOne("SistemaFinanceiro.Domain.Entities.Despesa", "Despesa")
+                        .WithMany("Tags")
+                        .HasForeignKey("DespesaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Despesa");
+                });
+
+            modelBuilder.Entity("SistemaFinanceiro.Domain.Entities.Despesa", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

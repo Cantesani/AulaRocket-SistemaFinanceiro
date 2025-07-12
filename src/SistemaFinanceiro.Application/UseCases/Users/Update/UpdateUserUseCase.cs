@@ -26,9 +26,12 @@ namespace SistemaFinanceiro.Application.UseCases.Users.Update
             _unidadeDeTrabalho = unidadeDeTrabalho;
         }
 
-        public UpdateUserUseCase(ILoggedUser loggedUser, IUserUpdateOnlyRepository updateRepository, IUserReadOnlyRepository userReadOnlyRepository, IUnidadeDeTrabalho unidadeDeTrabalho)
-        {
-        }
+        // public UpdateUserUseCase(ILoggedUser loggedUser
+        //                         ,IUserUpdateOnlyRepository updateRepository
+        //                         ,IUserReadOnlyRepository userReadOnlyRepository
+        //                         ,IUnidadeDeTrabalho unidadeDeTrabalho)
+        // {
+        // }
 
         public async Task Execute(RequestUpdateUserJson request)
         {

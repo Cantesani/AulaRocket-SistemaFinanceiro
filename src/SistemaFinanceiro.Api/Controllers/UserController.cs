@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using SistemaFinanceiro.Application.UseCases.Users.ChangePassword;
 using SistemaFinanceiro.Application.UseCases.Users.Delete;
 using SistemaFinanceiro.Application.UseCases.Users.Profile;
 using SistemaFinanceiro.Application.UseCases.Users.Registrar;
@@ -45,6 +46,21 @@ namespace SistemaFinanceiro.Api.Controllers
             await useCase.Execute(request);
             return NoContent();
         }
+
+        [HttpPut("change-password")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword([FromBody] RequestChangePasswordUserJson request,
+                                                        [FromServices] IChangePasswordUseCase useCase)
+        {
+
+            await useCase.Execute(request);
+
+            return NoContent();
+        }
+        
+        
 
         [HttpDelete]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
