@@ -153,4 +153,7 @@
   <data name="VALOR" xml:space="preserve">
     <value>Valor</value>
   </data>
+  <data name="TAG_NAO_SUPORTADA" xml:space="preserve">
+    <value />
+  </data>
 </root>

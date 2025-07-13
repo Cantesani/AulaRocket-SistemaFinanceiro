@@ -20,7 +20,7 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.GetByID
             _loggedUser = loggedUser;
             _repository = repository;
             _mapper = mapper;
-        }
+        } 
         public async Task<ResponseDespesaJson> execute(long id)
         {
             var user = await _loggedUser.Get();

@@ -14,7 +14,7 @@ namespace WebApi.test.Despesas.GetById
         public GetByIdDespesasTest(CustomWebApplicationFactory WebApplicationFactory) : base(WebApplicationFactory)
         {
             _token = WebApplicationFactory.User_Team_Member.GetToken();
-            _despesaId = WebApplicationFactory.Despesa.GetId();
+            // _despesaId = WebApplicationFactory.Despesa.GetId();
         }
 
         [Fact]

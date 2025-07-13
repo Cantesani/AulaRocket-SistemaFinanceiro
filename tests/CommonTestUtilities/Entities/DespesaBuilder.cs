@@ -1,12 +1,12 @@
 ﻿using Bogus;
 using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Enums;
+using Tag = SistemaFinanceiro.Domain.Enums.Tag;
 
 namespace CommonTestUtilities.Entities
 {
     public class DespesaBuilder
     {
-
         public static List<Despesa> Collection(User user, uint count = 2)
         {
             var list = new List<Despesa>();
@@ -35,7 +35,13 @@ namespace CommonTestUtilities.Entities
                 .RuleFor(r => r.Data, faker => faker.Date.Past())
                 .RuleFor(r => r.Valor, faker => faker.Random.Decimal(min: 1, max: 1000))
                 .RuleFor(r => r.TipoPagto, faker => faker.PickRandom<TipoPagto>())
-                .RuleFor(r => r.UserId, _ => user.Id);
+                .RuleFor(r => r.UserId, _ => user.Id)
+                .RuleFor(r => r.Tags, faker => faker.Make(3, () => new SistemaFinanceiro.Domain.Entities.Tag
+                {
+                    Id = 1,
+                    Valor = faker.PickRandom<SistemaFinanceiro.Domain.Enums.Tag>(),
+                    DespesaId = 1
+                }));
         }
 
     }

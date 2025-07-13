@@ -9,5 +9,8 @@ namespace SistemaFinanceiro.Communication.Requests.Despesas
         public decimal Valor { get; set; }
         public DateTime Data { get; set; }
         public TipoPagto TipoPagto { get; set; }
+
+        public IList<Tag> Tags { get; set; } = [];
+
     }
 }

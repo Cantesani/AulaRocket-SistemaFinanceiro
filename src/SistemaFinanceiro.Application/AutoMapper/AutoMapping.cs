@@ -18,16 +18,24 @@ namespace SistemaFinanceiro.Application.AutoMapper
 
         private void RequestToEntity()
         {
-            CreateMap<RequestDespesaJson, Despesa>();
             CreateMap<RequestRegistraUserJson, User>()
                 .ForMember(dest => dest.Password, config => config.Ignore());
+            
+            CreateMap<RequestDespesaJson, Despesa>()
+                .ForMember(dest => dest.Tags, config => config.MapFrom(source => source.Tags.Distinct()));
+            
+            CreateMap<Communication.Enums.Tag, Tag>()
+                .ForMember(x=>x.Valor, config => config.MapFrom(source => source));
+            
         }
 
         private void EntityToResponse()
         {
+            CreateMap<Despesa, ResponseDespesaJson>()
+                .ForMember(dest => dest.Tags, config => config.MapFrom(source => source.Tags.Select(tag => tag.Valor)));
+            
             CreateMap<Despesa, ResponseLstDespesasJson>();
             CreateMap<Despesa, ResponseShortDespesaJson>();
-            CreateMap<Despesa, ResponseDespesaJson>();
             CreateMap<User, ResponseUserProfileJson>();
         }
     }

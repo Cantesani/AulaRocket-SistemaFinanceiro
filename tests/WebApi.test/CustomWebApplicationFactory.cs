@@ -14,8 +14,8 @@ namespace WebApi.test
     {
         public UserIdentityMananger User_Team_Member { get; set; } = default!;
         public UserIdentityMananger User_Admin { get; set; } = default!;
-        public DespesaIdentityMananger Despesa { get; set; } = default!;
-
+        
+        public DespesaIdentityMananger Despesa_Team_Member { get; set; } = default!;
 
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -40,19 +40,21 @@ namespace WebApi.test
                 });
         }
 
-        private void StartDatabase(SistemaFinanceiroDbContext dbContext, 
-                                   IPasswordCriptografada passwordCriptografada,
-                                   IAccessTokenGenerator acessTokenGenerator)
+        private void StartDatabase(SistemaFinanceiroDbContext dbContext,
+            IPasswordCriptografada passwordCriptografada,
+            IAccessTokenGenerator acessTokenGenerator)
         {
-            var user = AddUsersTeamMember(dbContext, passwordCriptografada, acessTokenGenerator);
-            AddDespesas(dbContext, user);
-
+            var userTeamMember = AddUsersTeamMember(dbContext, passwordCriptografada, acessTokenGenerator);
+            // var despesaTeamMember = AddDespesas(dbContext, userTeamMember, despesaId: 1, tagId: 1);
+            
+            
+            
             dbContext.SaveChanges();
         }
 
         private SistemaFinanceiro.Domain.Entities.User AddUsersTeamMember(SistemaFinanceiroDbContext dbContext,
-                              IPasswordCriptografada passwordCriptografada,
-                              IAccessTokenGenerator accessTokenGenerator)
+            IPasswordCriptografada passwordCriptografada,
+            IAccessTokenGenerator accessTokenGenerator)
         {
             var user = UserBuilder.Build();
             var password = user.Password;
@@ -68,13 +70,20 @@ namespace WebApi.test
             return user;
         }
 
-        private void AddDespesas(SistemaFinanceiroDbContext dbContext, SistemaFinanceiro.Domain.Entities.User user)
-        {
-            var despesa = DespesaBuilder.Build(user);
-            dbContext.Despesas.Add(despesa);
-
-            Despesa = new DespesaIdentityMananger(despesa);
-        }
-
+        // private AddDespesas(SistemaFinanceiroDbContext dbContext, SistemaFinanceiro.Domain.Entities.User user,
+        //     long despesaId, long tagId)
+        // {
+        //     var despesa = DespesaBuilder.Build(user);
+        //     dbContext.Despesas.Add(despesa);
+        //
+        //     foreach (var tag in despesa.Tags)
+        //     {
+        //         tag.Id = tagId;
+        //         tag.DespesaId = despesaId;
+        //         ;
+        //     }
+        //
+        //     Despesa_Team_Member = new DespesaIdentityMananger(despesa);
+        // }
     }
 }

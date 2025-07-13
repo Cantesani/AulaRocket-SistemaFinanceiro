@@ -28,8 +28,6 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
         _loggedUser = loggedUser;
     }
     
-    /* TODO: Para: Gabriel - Testar codigo (12/07/2025) */
-    // exemplo de comentario no codigo
     public async Task Execute(RequestChangePasswordUserJson request)
     {
         var userLogado = await _loggedUser.Get();
@@ -37,11 +35,11 @@ public class ChangePasswordUseCase : IChangePasswordUseCase
 
         var user = await _repository.GetById(userLogado.Id);
         user.Password = _passwordCriptografada.Criptografar(request.NewPassword);
-     
+
         _repository.Update(user);
         await _unidadeDeTrabalho.Commit();
     }
-
+    
     private void Validate(RequestChangePasswordUserJson request, User loggedUser)
     {
         var validator = new ChangePasswordValidator();

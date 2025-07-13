@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using SistemaFinanceiro.Application.UseCases.Despesas.Registrar;
 using SistemaFinanceiro.Communication.Requests.Despesas;
+using SistemaFinanceiro.Domain.Entities;
 using SistemaFinanceiro.Domain.Repositories;
 using SistemaFinanceiro.Domain.Repositories.Despesas;
 using SistemaFinanceiro.Domain.Services.LoggerUser;
@@ -31,12 +32,13 @@ namespace SistemaFinanceiro.Application.UseCases.Despesas.Update
             var loggedUser = await _loggedUser.Get();
 
             var despesa = await _repository.GetById(id, loggedUser.Id);
-
-
+            
             if (despesa is null)
             {
                 throw new NaoExisteException(ResourceErrorMessages.DESPESA_NAO_ENCONTRADA);
             }
+            
+            despesa.Tags.Clear();
 
             _mapper.Map(request, despesa);
 

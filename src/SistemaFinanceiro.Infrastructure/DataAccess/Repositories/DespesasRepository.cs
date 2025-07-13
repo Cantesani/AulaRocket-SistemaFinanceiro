@@ -31,14 +31,15 @@ namespace SistemaFinanceiro.Infrastructure.DataAccess.Repositories
         async Task<Despesa?> IDespesasReadOnlyRepository.GetById(long id, long userId)
         {
             return await _dbContext.Despesas
+                .Include(x=>x.Tags)
                 .AsNoTracking()
                  .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
         async Task<Despesa?> IDespesaUpdateOnlyRepository.GetById(long id, long userId)
         {
-            return await _dbContext
-                .Despesas
+            return await _dbContext .Despesas
+                .Include(x=>x.Tags)
                 .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
         }
 
